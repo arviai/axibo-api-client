@@ -1,6 +1,6 @@
 # swagger_client.MotionApi
 
-All URIs are relative to *http://10.42.0.1:2200*
+All URIs are relative to *http://10.42.0.1:2200/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
