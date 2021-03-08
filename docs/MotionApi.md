@@ -1,6 +1,6 @@
 # swagger_client.MotionApi
 
-All URIs are relative to *https://virtserver.swaggerhub.com/SohaibAl-emara/AXIBOVFX/1.0.0*
+All URIs are relative to *http://10.42.0.1:2200*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
