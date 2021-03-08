@@ -24,11 +24,6 @@ python setup.py install --user
 ```
 (or `sudo python setup.py install` to install the package for all users)
 
-Then import the package:
-```python
-import swagger_client
-```
-
 ## Getting Started
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
@@ -41,7 +36,7 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.ImagesApi(swagger_client.ApiClient(configuration))
+api_instance = swagger_client.ImagesApi()
 
 try:
     # Retrives an pose overlay image with a timestamp
