@@ -52,58 +52,23 @@ class RESTResponse(io.IOBase):
 
 class RESTClientObject(object):
 
-    def __init__(self, configuration, pools_size=4, maxsize=None):
+    def __init__(self, configuration, pools_size=4, maxsize=4):
         # urllib3.PoolManager will pass all kw parameters to connectionpool
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  # noqa: E501
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
         # maxsize is the number of requests to host that are allowed in parallel  # noqa: E501
         # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  # noqa: E501
 
-        # cert_reqs
-        if configuration.verify_ssl:
-            cert_reqs = ssl.CERT_REQUIRED
-        else:
-            cert_reqs = ssl.CERT_NONE
-
-        # ca_certs
-        if configuration.ssl_ca_cert:
-            ca_certs = configuration.ssl_ca_cert
-        else:
-            # if not set certificate file, use Mozilla's root certificates.
-            ca_certs = certifi.where()
-
-        addition_pool_args = {}
-        if configuration.assert_hostname is not None:
-            addition_pool_args['assert_hostname'] = configuration.assert_hostname  # noqa: E501
-
-        if maxsize is None:
-            if configuration.connection_pool_maxsize is not None:
-                maxsize = configuration.connection_pool_maxsize
-            else:
-                maxsize = 4
-
         # https pool manager
-        if configuration.proxy:
-            self.pool_manager = urllib3.ProxyManager(
-                num_pools=pools_size,
-                maxsize=maxsize,
-                cert_reqs=cert_reqs,
-                ca_certs=ca_certs,
-                cert_file=configuration.cert_file,
-                key_file=configuration.key_file,
-                proxy_url=configuration.proxy,
-                **addition_pool_args
-            )
-        else:
-            self.pool_manager = urllib3.PoolManager(
-                num_pools=pools_size,
-                maxsize=maxsize,
-                cert_reqs=cert_reqs,
-                ca_certs=ca_certs,
-                cert_file=configuration.cert_file,
-                key_file=configuration.key_file,
-                **addition_pool_args
-            )
+
+        self.pool_manager = urllib3.PoolManager(
+            num_pools=pools_size,
+            maxsize=maxsize,
+            cert_reqs=ssl.CERT_NONE,
+            ca_certs=certifi.where(),
+            cert_file=None,
+            key_file=None,
+        )
 
     def request(self, method, url, query_params=None, headers=None,
                 body=None, post_params=None, _preload_content=True,

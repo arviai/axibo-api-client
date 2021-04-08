@@ -32,25 +32,32 @@ class ControlCMD(object):
     """
     swagger_types = {
         'position': 'ControlCMDPosition',
-        'velocity': 'ControlCMDPosition'
+        'velocity': 'ControlCMDPosition',
+        'timestamp': 'ControlCMDPosition'
     }
 
     attribute_map = {
         'position': 'position',
-        'velocity': 'velocity'
+        'velocity': 'velocity',
+        'timestamp': 'timestamp'
+
     }
 
-    def __init__(self, position=None, velocity=None):  # noqa: E501
+    def __init__(self, position=None, velocity=None,timestamp=None):  # noqa: E501
         """ControlCMD - a model defined in Swagger"""  # noqa: E501
 
         self._position = None
         self._velocity = None
+        self._timestamp = None
+
         self.discriminator = None
 
         if position is not None:
             self.position = position
         if velocity is not None:
             self.velocity = velocity
+        if timestamp is not None:
+            self.timestamp = timestamp
 
     @property
     def position(self):
@@ -93,6 +100,26 @@ class ControlCMD(object):
         """
 
         self._velocity = velocity
+    @property
+    def timestamp(self):
+        """Gets the timestamp of this ControlCMD.  # noqa: E501
+
+
+        :return: The timestamp of this ControlCMD.  # noqa: E501
+        :rtype: ControlCMDPosition
+        """
+        return self._timestamp
+
+    @timestamp.setter
+    def timestamp(self, timestamp):
+        """Sets the timestamp of this ControlCMD.
+
+
+        :param timestamp: The timestamp of this ControlCMD.  # noqa: E501
+        :type: ControlCMDPosition
+        """
+
+        self._timestamp = timestamp
 
     def to_dict(self):
         """Returns the model properties as a dict"""

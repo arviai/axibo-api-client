@@ -94,12 +94,6 @@ class SystemMsg(object):
         :param operation: The operation of this SystemMsg.  # noqa: E501
         :type: str
         """
-        allowed_values = ["in moition", "tracking", "detecting", "idle"]  # noqa: E501
-        if operation not in allowed_values:
-            raise ValueError(
-                "Invalid value for `operation` ({0}), must be one of {1}"  # noqa: E501
-                .format(operation, allowed_values)
-            )
 
         self._operation = operation
 
